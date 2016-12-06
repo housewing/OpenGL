@@ -11,8 +11,6 @@
 using namespace cv;
 
 int CurrentWidth = 800,	CurrentHeight = 600,	WindowHandle = 0;
-GLuint myIndex;
-GLubyte myLists[10];
 
 unsigned FrameCount = 0;
 unsigned int countIdleTime=0;
@@ -20,7 +18,6 @@ unsigned int countIdleTime=0;
 void ResizeFunction(int, int);
 void RenderFunction(void);
 void IdleFunction(void);
-void ColorMap(float InValue,float Lowerbound, float Upperbound,unsigned char *OutputRGB);
 void ColorMap(float InValue,float Lowerbound, float Upperbound,float *OutputRGB);
 
 Model obj;
@@ -35,26 +32,18 @@ void ResizeFunction(int Width, int Height)
 
 void RenderFunction(void)
 {
-	int i;
+	//int i;
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	float M[]={1,0,0,0,  0,1,0,0,   0,0,1,0,  300,0,0,1 };
+	//float M[]={1,0,0,0,  0,1,0,0,   0,0,1,0,  300,0,0,1 };
+
  	glViewport(0, 0, CurrentWidth, CurrentHeight);
 
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 
-	glOrtho(-float(CurrentWidth)/2.0,float(CurrentWidth)/2.0,
-		    -float(CurrentHeight)/2.0,float(CurrentHeight)/2.0,
-			-CurrentHeight*10.0,CurrentHeight*10.0);
-// 	glFrustum(-2,2,
-// 		      -1.5,+1.5,
-// 		      5+2*sin(degree),2000);
-// 	gluLookAt(1000*cos(degree),-1000*sin(degree),1000,
-// 		      0,0,0,
-// 			  0,0,1);
- 	gluLookAt(	0,0,1000,
- 				0,0,0,
- 				0.0,1,0);
+	glOrtho(-float(CurrentWidth) / 2.0, float(CurrentWidth) / 2.0, -float(CurrentHeight) / 2.0, float(CurrentHeight) / 2.0, -CurrentHeight*10.0, CurrentHeight*10.0);
+
+	gluLookAt(0, 0, 1000, 0, 0, 0, 0.0, 1, 0);
 
 
 	
@@ -62,12 +51,13 @@ void RenderFunction(void)
 	
 	glMatrixMode(GL_MODELVIEW);
 	
-	float rgb[3];
+	//float rgb[3];
 
 	glDisable(GL_LIGHTING);
 	glPushMatrix();
 
 	obj.Draw();
+
 		//glBegin(GL_LINES);
 		//	for (float iValue=-10;iValue<10.0;iValue+=0.01)
 		//	{
