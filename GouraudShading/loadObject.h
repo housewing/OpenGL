@@ -107,7 +107,21 @@ void Model::Load(char* filename)
 	ifs2.close();
 }
 
+int degree = 0;
 void Model::Draw(){
+	degree += 1;
+	float m_Emissive[] = { 0.0, 0.0, 0.0, 1.0 };
+	float m_Ambient[] = { 0.0, 0.0, 0.0, 1.0 };
+	float m_Diffuse[] = { 0.7, 0.7, 0.7, 1.0 };
+	float m_Specular[] = { 1.0, 1.0, 1.0, 1.0 };
+	float m_fShininess = float(degree % 120 + 1);
+
+	glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, &m_Emissive[0]);
+	glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, &m_Ambient[0]);
+	glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, &m_Diffuse[0]);
+	glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, &m_Specular[0]);
+	glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, m_fShininess);
+
 	glBegin(GL_TRIANGLES);
 	for (unsigned int i = 0; i < F.size(); i++)
 	{

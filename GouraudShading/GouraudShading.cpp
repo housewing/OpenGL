@@ -21,16 +21,28 @@ Model obj;
 
 void initialize()
 {
-	GLfloat light_ambient[] = { 0.2, 0.2, 0.2, 1.0 }; // 0.1, 0.1, 0.1, 1.0
-	GLfloat light_diffuse[] = { 1.0, 1.0, 1.0, 1.0 }; // 0.6, 0.6, 0.6, 1
-	GLfloat light_specular[] = { 1.0, 1.0, 1.0, 1.0 }; // 0.7, 0.7, 0.3, 1
-	//GLfloat light_position[] = { 1.0, 1.0, 1.0, 0.0 };
+	//GLfloat light_ambient[] = { 0.2, 0.2, 0.2, 1.0 }; // 0.1, 0.1, 0.1, 1.0
+	//GLfloat light_diffuse[] = { 1.0, 1.0, 1.0, 1.0 }; // 0.6, 0.6, 0.6, 1
+	//GLfloat light_specular[] = { 1.0, 1.0, 1.0, 1.0 }; // 0.7, 0.7, 0.3, 1
+	////GLfloat light_position[] = { 1.0, 1.0, 1.0, 0.0 };
 
-	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, light_ambient);
-	//glLightfv(GL_LIGHT0, GL_AMBIENT, light_ambient);
-	glLightfv(GL_LIGHT0, GL_DIFFUSE, light_diffuse);
-	glLightfv(GL_LIGHT0, GL_SPECULAR, light_specular);
-	//glLightfv(GL_LIGHT0, GL_POSITION, light_position);
+	//glLightModelfv(GL_LIGHT_MODEL_AMBIENT, light_ambient);
+	////glLightfv(GL_LIGHT0, GL_AMBIENT, light_ambient);
+	//glLightfv(GL_LIGHT0, GL_DIFFUSE, light_diffuse);
+	//glLightfv(GL_LIGHT0, GL_SPECULAR, light_specular);
+	////glLightfv(GL_LIGHT0, GL_POSITION, light_position);
+
+
+	GLfloat MaterialAmbient[] = { 0.2, 0.2, 0.2, 1.0f };
+	GLfloat MaterialDiffuse[] = { 1.0, 1.0, 1.0, 1.0f };
+	GLfloat MaterialSpecular[] = { 1.0, 1.0, 1.0, 1.0f };
+	GLfloat AmbientLightPosition[] = { 1000, -1000, 1000, 1.0f };
+
+	glLightfv(GL_LIGHT0, GL_AMBIENT, MaterialAmbient);
+	glLightfv(GL_LIGHT0, GL_DIFFUSE, MaterialDiffuse);
+	glLightfv(GL_LIGHT0, GL_SPECULAR, MaterialSpecular);
+	glLightfv(GL_LIGHT0, GL_POSITION, AmbientLightPosition);
+
 
 	glEnable(GL_COLOR_MATERIAL);
 	glLightModeli(GL_LIGHT_MODEL_TWO_SIDE, GL_TRUE); // GL_FALSE
@@ -75,7 +87,7 @@ int main(int argc, char* argv[])
 	initialize();
 
 	//Giraffe  Agrippa_Rainbow  bunny
-	obj.Load("obj/bunny.obj");
+	obj.Load("gouraudShading/obj/bunny.obj");
 	std::cout << "Vertex " << obj.V.size() << " Face " << obj.F.size() << " RGB " << obj.RGB.size() << std::endl;
 
 	obj.SearchNeibor();
